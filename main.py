@@ -14,3 +14,5 @@ if (mongo_username is None or mongo_password is None):
 client = pymongo.MongoClient(f"""mongodb+srv://{urllib.parse.quote(mongo_username)}:{urllib.parse.quote(mongo_password)}@comp3000-air-quality.ltwo0iu.mongodb.net/?retryWrites=true&w=majority""")
 
 db = client.metadata
+
+db.metadata.insert_many(metadata.to_dict("records"))
