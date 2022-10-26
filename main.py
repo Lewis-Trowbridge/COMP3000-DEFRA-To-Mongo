@@ -6,7 +6,7 @@ import os
 metadata = importMeta()
 metadata = metadata.rename(columns={"site_id": "_id"})
 metadata = metadata.reset_index(drop=True)
-print(metadata)
+metadata_records = metadata.to_dict("records")
 
 mongo_username = os.getenv("MONGO_DB_USER")
 mongo_password = os.getenv("MONGO_DB_PASS")
@@ -18,4 +18,6 @@ client = pymongo.MongoClient(f"""mongodb+srv://{urllib.parse.quote(mongo_usernam
 
 db = client.metadata
 
-db.metadata.insert_many(metadata.to_dict("records"))
+batch_operations = [pymongo.ReplaceOne({"_id": x.get("_id")}, x, upsert=True) for x in metadata_records]
+
+db.metadata.bulk_write(batch_operations)
