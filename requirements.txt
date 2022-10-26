@@ -1,0 +1,2 @@
+pyaurn == 0.1.1
+pymongo == 4.3.2
