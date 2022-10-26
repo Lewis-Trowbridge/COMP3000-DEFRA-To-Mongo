@@ -20,4 +20,5 @@ db = client.metadata
 
 batch_operations = [pymongo.ReplaceOne({"_id": x.get("_id")}, x, upsert=True) for x in metadata_records]
 
-db.metadata.bulk_write(batch_operations)
+results = db.metadata.bulk_write(batch_operations)
+print(results.bulk_api_result)
