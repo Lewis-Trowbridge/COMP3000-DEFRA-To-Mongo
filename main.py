@@ -4,6 +4,9 @@ import urllib.parse
 import os
 
 metadata = importMeta()
+metadata = metadata.rename(columns={"site_id": "_id"})
+metadata = metadata.reset_index(drop=True)
+print(metadata)
 
 mongo_username = os.getenv("MONGO_DB_USER")
 mongo_password = os.getenv("MONGO_DB_PASS")
