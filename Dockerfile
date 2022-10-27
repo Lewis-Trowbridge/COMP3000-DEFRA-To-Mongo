@@ -11,7 +11,7 @@ RUN pip install -r requirements.txt
 FROM python:slim
 COPY --from=compile /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
- 
+
 COPY main.py .
 
 ENTRYPOINT [ "python", "main.py" ]
