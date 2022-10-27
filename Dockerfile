@@ -1,7 +1,7 @@
-FROM python:bullseye AS compile
+FROM python:slim AS compile
 
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends build-essential gcc zlib1g-dev
+RUN apt-get install -y --no-install-recommends build-essential gcc zlib1g-dev libbz2-dev liblzma-dev
 
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
