@@ -9,7 +9,7 @@ metadata = metadata.rename(columns={"site_id": "_id"})
 metadata = metadata.reset_index(drop=True)
 metadata["coords"] = metadata[["longitude", "latitude"]].values.tolist()
 metadata.loc[metadata["end_date"] == "ongoing", "end_date"] = str(datetime.date.today())
-metadata = metadata.drop(["location_type", "latitude", "longitude", "parameter", "Parameter_name", "ratified_to", "zone", "agglomeration", "local_authority"], axis=1)
+metadata = metadata.drop(["latitude", "longitude", "parameter", "Parameter_name", "ratified_to", "zone", "agglomeration", "local_authority"], axis=1)
 metadata_records = metadata.to_dict("records")
 
 mongo_username = os.getenv("MONGO_DB_USER")
